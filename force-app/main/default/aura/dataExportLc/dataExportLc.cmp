@@ -1,0 +1,48 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global">
+
+
+    <aura:attribute name="title" type="String" default="Data Export" />
+    <aura:attribute name="selectedOrg" type="String" />
+    <aura:attribute name="showOrgSelection" type="Boolean" default="true"/>
+    <aura:attribute name="showUserNameSelection" type="Boolean" default="false"/>
+
+
+    <lightning:card>
+        <aura:if isTrue="{!v.showOrgSelection}">
+        <div class="slds-m-around_medium">
+            <aura:set attribute="title">
+                <lightning:icon iconName="utility:connected_apps" size="small" />
+                {! v.title }
+            </aura:set>
+            <lightning:select  aura:id="select" name="select" label="Which org?" required="true"  onchange="{! c.onChange }">
+                <option value="">choose destination org...</option>
+                <option value="loki">loik</option>
+            </lightning:select>
+            <lightning:button 
+            class="slds-m-top_small"    
+            variant="brand" label="Next" title="Next" onclick="{!c.handleClickOrg }" />
+        </div>
+        </aura:if>
+
+        <aura:if isTrue="{!v.showUserNameSelection}">
+        <div class="slds-m-around_medium">
+            <div class="row">
+                    <h2 class="header">Basic Input Text</h2>
+                    <lightning:input name="input1" label="Enter UserName" />
+                    <lightning:input name="input2" label="Enter Password"/>
+                    <lightning:input name="input3" label="Enter security token"/>
+                    <lightning:input name="input4" label="Enter ClientId"/>
+                    <lightning:input name="input5" label="Enter Client secret"/>
+                </div>
+            <div>
+            <lightning:button 
+            class="slds-m-top_small"    
+            variant="brand" label="Previous" title="Previous" onclick="{!c.handleClickDetailsBack }" />
+            <lightning:button 
+            class="slds-m-top_small"    
+            variant="brand" label="Next" title="Next" onclick="{!c.handleClickDetailsFarward }" />
+        </div>
+        </div>
+        </aura:if>
+    </lightning:card>
+</aura:component>
